@@ -1,12 +1,12 @@
 package com.example.demo.Book;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.demo.BookMark.BookMark;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Entity
@@ -24,6 +24,13 @@ public class Book {
     private Long pageCount;
     private URL thumbnail;
 
+    @OneToMany(
+            mappedBy = "book",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    private List<BookMark> bookMarks = new ArrayList<>();
+
     public static Book from(BookRequest request) {
         return  Book.builder()
                 .title(request.getTitle())
@@ -33,5 +40,4 @@ public class Book {
                 .thumbnail(request.getThumbnail())
                 .build();
     }
-
 }
