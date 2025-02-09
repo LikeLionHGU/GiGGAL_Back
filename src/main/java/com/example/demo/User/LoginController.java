@@ -1,11 +1,5 @@
 package com.example.demo.User;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -13,7 +7,12 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,14 +49,13 @@ public class LoginController {
 
 
                 String email = payload.getEmail();
-                String name = (String) payload.get("name");
 
-                userService.saveOrUpdate(email, name);    // 사용자 정보 확인 또는 저장
+                userService.saveOrUpdate(email);    // 사용자 정보 확인 또는 저장
+
                 // 응답 데이터 생성
                 Map<String, Object> response = new HashMap<>();
                 response.put("status", "success");
                 response.put("email", email);
-                response.put("name", name);
                 return ResponseEntity.ok(response);
             } else {
                 return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Invalid ID token."));

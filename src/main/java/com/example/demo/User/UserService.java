@@ -1,5 +1,6 @@
 package com.example.demo.User;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,19 +14,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveOrUpdate(String email, String nickname) {
+    public User saveOrUpdate(String email) {
         Optional<User> existingUser = userRepository.findByEmail(email);
 
         if (existingUser.isPresent()) {
-            User user = existingUser.get();
-            user.setNickname(nickname);
-            return userRepository.save(user);
+            return existingUser.get();
         }else{
             User user = new User();
             user.setEmail(email);
-            user.setNickname(nickname);
             return userRepository.save(user);
         }
     }
 
+    @Transactional
+    public User update(String email, String Nickname){
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found"));
+        user.setNickname(Nickname);
+        return user;
+    }
 }
