@@ -8,20 +8,10 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Id
     private String email;
     private String nickname;
-
-    private User(String email, String nickname) {
-        this.email = email;
-        this.nickname = nickname;
-    }
-
-    public static User of(String email, String nickname) {
-        return new User(email, nickname);
-    }
-
 }
