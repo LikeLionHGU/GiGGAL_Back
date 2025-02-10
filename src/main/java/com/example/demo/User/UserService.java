@@ -1,6 +1,8 @@
 package com.example.demo.User;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +16,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveOrUpdate(String email) {
+    public User saveOrUpdate(String email, String name) {
         Optional<User> existingUser = userRepository.findByEmail(email);
 
         if (existingUser.isPresent()) {
@@ -22,6 +24,7 @@ public class UserService {
         }else{
             User user = new User();
             user.setEmail(email);
+            user.setNickname(name);
             return userRepository.save(user);
         }
     }
