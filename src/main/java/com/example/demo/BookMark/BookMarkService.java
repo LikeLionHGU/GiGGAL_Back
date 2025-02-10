@@ -5,10 +5,11 @@ import com.example.demo.Book.BookDto;
 import com.example.demo.Book.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookMarkService {
 
     private final BookMarkRepository bookMarkRepository;
@@ -19,8 +20,8 @@ public class BookMarkService {
         return "북마크에 성공하였습니다.";
     }
 
-    public Long countBookMarks(Long bookId) {
-        Long numberOfPeopleWhoBookMarkThisBook = bookMarkRepository.countByBook(bookId);
-        return numberOfPeopleWhoBookMarkThisBook;
-    }
+//    public Long countBookMarks(Long bookId) {
+//        Long numberOfPeopleWhoBookMarkThisBook = bookMarkRepository.countByBook(bookId);
+//        return numberOfPeopleWhoBookMarkThisBook;
+//    }
 }

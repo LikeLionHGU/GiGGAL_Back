@@ -1,12 +1,13 @@
 package com.example.demo.Book;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
