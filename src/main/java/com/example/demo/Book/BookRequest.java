@@ -12,10 +12,10 @@ public class BookRequest {
     private String title;
     private String author;
     private String publisher;
-    private Long pageCount;
+    private int pageCount;
     private URL thumbnail;
 
-    public BookRequest(String title, String author, String publisher, Long pageCount, URL thumbnail, String status) {
+    public BookRequest(String title, String author, String publisher, int pageCount, URL thumbnail) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
