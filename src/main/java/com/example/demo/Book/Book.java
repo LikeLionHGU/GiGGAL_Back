@@ -16,13 +16,17 @@ import java.util.List;
 @NoArgsConstructor
 public class Book {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    private String id;
     private String title;
     private String author;
     private String publisher;
-    private Long pageCount;
+    private int pageCount;
     private URL thumbnail;
+    private int hardCount;
+    private int normalCount;
+    private int easyCount;
+
 
     @OneToMany(
             mappedBy = "book",

@@ -11,10 +11,10 @@ import java.net.URL;
 @NoArgsConstructor
 public class BookDto {
 
-    private Long id;
+    private String id;
     private String title;
     private String author;
-    private Long pageCount;
+    private int pageCount;
     private String publisher;
     private URL thumbnail;
 

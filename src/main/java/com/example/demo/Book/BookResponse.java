@@ -11,10 +11,11 @@ import java.net.URL;
 @Setter
 public class BookResponse {
 
-    private Long id;
+    private String id;
     private String title;
     private String author;
     private String publisher;
+    private int pageCount;
     private URL thumbnail;
 
     public static BookResponse from(BookDto bookDto) {
@@ -23,6 +24,7 @@ public class BookResponse {
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
                 .publisher(bookDto.getPublisher())
+                .pageCount(bookDto.getPageCount())
                 .thumbnail(bookDto.getThumbnail())
                 .build();
     }
