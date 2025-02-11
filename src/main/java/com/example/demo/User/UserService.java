@@ -15,10 +15,10 @@ public class UserService {
    private final HttpSession session;
 
     public User saveOrUpdate(String email, String name) {
-        Optional<User> existingUser = userRepository.findByEmail(email);
+        User existingUser = userRepository.findByEmail(email);
 
-        if (existingUser.isPresent()) {
-            return existingUser.get();
+        if (existingUser != null) {
+            return existingUser;
         }else{
             User user = new User();
             user.setEmail(email);

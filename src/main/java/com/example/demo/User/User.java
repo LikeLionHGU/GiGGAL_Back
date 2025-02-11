@@ -1,9 +1,11 @@
 package com.example.demo.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.example.demo.BookMark.BookMark;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -16,4 +18,11 @@ public class User {
     private String email;
     private String nickname;
 
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<BookMark> bookMarks = new ArrayList<>();
 }

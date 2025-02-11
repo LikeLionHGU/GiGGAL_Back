@@ -23,7 +23,10 @@ public class MemoService {
     public Long addMemo(MemoRequest memoRequest, String bookId) {
         //유저 정보 가져오기
         String userEmail = userService.getUserEmail();
-        User user = userRepository.findByEmail(userEmail).orElseThrow(()-> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(userEmail);
+        if(user == null){
+            throw new RuntimeException("User not found");
+        }
         Book book = bookRepository.findById(bookId);
         if(book == null) {
             throw new RuntimeException("Book not found");
