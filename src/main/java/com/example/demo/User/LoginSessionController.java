@@ -10,14 +10,12 @@ import com.google.api.client.json.gson.GsonFactory;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
 
+@RestController
 @RequestMapping("/api/auth")
 public class LoginSessionController {
 
@@ -39,11 +37,12 @@ public class LoginSessionController {
                 Payload payload = idToken.getPayload();
 
                 String email = payload.getEmail();
-                String name = (String) payload.get("name");
+                int index = email.indexOf("@");
+                String nickName = email.substring(0, index);
 
                 // 세션 객체에 사용자 정보 저장
                 session.setAttribute("email", email);
-                session.setAttribute("name", name);
+                session.setAttribute("nickName", nickName);
 
                 return ResponseEntity.ok(Collections.singletonMap("status", "success"));
             } else {
@@ -57,15 +56,22 @@ public class LoginSessionController {
     @GetMapping("/user/session")
     public ResponseEntity<Map<String, Object>> getCurrentUser(HttpSession session) {
         String email = (String) session.getAttribute("email");
-        String name = (String) session.getAttribute("name");
+        String nickName = (String) session.getAttribute("nickName");
 
         if (email != null) {
             return ResponseEntity.ok(Map.of(
                     "email", email,
-                    "name", name
+                    "nickName", nickName
             ));
         } else {
             return ResponseEntity.status(401).body(Collections.singletonMap("error", "User not logged in"));
         }
+    }
+
+    @PutMapping("/user/session/out")
+    public ResponseEntity<Map<String, Object>> logout(HttpSession session) {
+        session.setAttribute("email", null);
+        session.setAttribute("name", null);
+        return ResponseEntity.ok(Collections.singletonMap("status", "logout"));
     }
 }

@@ -50,15 +50,15 @@ public class LoginController {
 
                 String email = payload.getEmail();
                 int index = email.indexOf("@");
-                String name = email.substring(0, index);
+                String nickName = email.substring(0, index);
 
-                userService.saveOrUpdate(email, name);    // 사용자 정보 확인 또는 저장
+                userService.saveOrUpdate(email, nickName);    // 사용자 정보 확인 또는 저장
 
                 // 응답 데이터 생성
                 Map<String, Object> response = new HashMap<>();
                 response.put("status", "success");
                 response.put("email", email);
-                response.put("nickName", name);
+                response.put("nickName", nickName);
                 return ResponseEntity.ok(response);
             } else {
                 return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Invalid ID token."));

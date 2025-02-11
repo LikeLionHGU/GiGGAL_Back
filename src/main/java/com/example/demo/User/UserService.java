@@ -1,7 +1,7 @@
 package com.example.demo.User;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UserService {
 
    private final UserRepository userRepository;
-
+   private final HttpSession session;
 
     public User saveOrUpdate(String email, String name) {
         Optional<User> existingUser = userRepository.findByEmail(email);
@@ -27,10 +27,8 @@ public class UserService {
         }
     }
 
-    @Transactional
-    public User update(String email, String Nickname){
-        User user = userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found"));
-        user.setNickname(Nickname);
-        return user;
+    public String getUserEmail() {
+        String email = (String) session.getAttribute("email");
+        return email;
     }
 }
