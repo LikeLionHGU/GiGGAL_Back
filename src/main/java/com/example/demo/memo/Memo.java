@@ -33,5 +33,4 @@ public class Memo {
                 .date(memoRequest.getDate())
                 .build();
     }
-
 }

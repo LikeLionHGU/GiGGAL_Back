@@ -25,4 +25,5 @@ public class User {
             orphanRemoval = true
     )
     private List<BookMark> bookMarks = new ArrayList<>();
+
 }
