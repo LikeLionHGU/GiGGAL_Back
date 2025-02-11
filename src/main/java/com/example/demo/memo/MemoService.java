@@ -21,24 +21,28 @@ public class MemoService {
     private final MemoRepository memoRepository;
 
     public Long addMemo(MemoRequest memoRequest, String bookId) {
-        //유저 정보 가져오기
         String userEmail = userService.getUserEmail();
         User user = userRepository.findByEmail(userEmail).orElseThrow(()-> new RuntimeException("User not found"));
-        Book book = bookRepository.findById(bookId).orElseThrow(()-> new RuntimeException("Book not found"));
+        Book book = bookRepository.findById(bookId);
+        if(book == null) {
+            throw new RuntimeException("Book not found");
+        }
         Memo memo = Memo.createMemo(memoRequest, user, book);
         memoRepository.save(memo);
         return memo.getMemoId();
     }
 
-    public List<MemoDto> findMemosOfTheUser(Long bookID){
-//        List<Memo> memos = memoRepository.findAll();
-//        List<MemoDto> memoDtos = MemoDto.From(memos);
-//        for (Memo eachMemo : memos){
-//            if (eachMemo.){
-//                memoDtos.add(MemoDto.from(eachMemo));
-//            }
-//        }
-//        return memoDtos;
+    public List<MemoDto> findMemosOfTheUser(String bookId){
+        List<Memo> memos = memoRepository.findAll();
+        List<MemoDto> memoDtos = new ArrayList<>();
+
+        for (Memo eachMemo : memos){
+            if (eachMemo.getBook().getId().equals(bookId) && eachMemo.getUser().getEmail().equals(userService.getUserEmail())){
+                String bookTitle = bookRepository.findById(bookId).getTitle();
+                memoDtos.add(MemoDto.from(eachMemo, bookTitle));
+            }
+        }
+        return memoDtos;
     }
 
     public void deleteMemo(Long memoId){
