@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class BookMarkController {
 
     private final BookMarkService bookMarkService;

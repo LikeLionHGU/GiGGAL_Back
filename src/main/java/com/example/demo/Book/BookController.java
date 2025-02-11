@@ -5,6 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +26,16 @@ public class BookController {
         return ResponseEntity.ok(message);
     }
 
+    @PutMapping("/book/difficulty/{bookId}")
+    public ResponseEntity<String> updateBookDifficulty(@PathVariable String bookId, @RequestBody BookRequestForDifficulty bookRequestForDifficulty) {
+        bookService.editBookDifficulty(bookId, bookRequestForDifficulty);
+        return ResponseEntity.ok().body("난이도 평가 완료!");
+    }
 
+    @GetMapping("/book/rankingOfDifficulty")
+    public ResponseEntity<List<BookResponseWithDifficulty>> getListOfBookWithDifficulty(@RequestBody BookRequestForListUp bookRequestForListUp) {
+        List<BookResponseWithDifficulty> bookResponseWithDifficulties = bookService.getBooksWithDifficulty(bookRequestForListUp).stream().map(BookResponseWithDifficulty::from).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookResponseWithDifficulties);
+    }
 
 }

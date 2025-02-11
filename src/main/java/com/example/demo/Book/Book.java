@@ -23,9 +23,8 @@ public class Book {
     private String publisher;
     private int pageCount;
     private URL thumbnail;
-    private int hardCount;
-    private int normalCount;
-    private int easyCount;
+    private int countForDifficulty;
+    private int difficultyScore;
 
 
     @OneToMany(
