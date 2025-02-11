@@ -15,5 +15,4 @@ public class User {
     @Id
     private String email;
     private String nickname;
-
 }
