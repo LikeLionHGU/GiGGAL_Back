@@ -26,6 +26,7 @@ public class LoginController {
     private String clientId;
 
     private final UserService userService;
+
     public LoginController(UserService userService) {
         this.userService = userService;
     }
@@ -46,7 +47,6 @@ public class LoginController {
                 // Payload는 ID Token에 포함된 사용자 정보를 나타냄.(GoogleIdToken에 ID Token이 포함되어 있음.)
                 // -> 여기에서 사용자 정보를 확인하고 저장
                 Payload payload = idToken.getPayload();
-
 
                 String email = payload.getEmail();
 

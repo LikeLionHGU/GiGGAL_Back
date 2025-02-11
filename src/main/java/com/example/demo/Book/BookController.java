@@ -18,7 +18,4 @@ public class BookController {
         String message = "Successfully created book"; // 북마크 기능까지 구현하면 "북마크 성공!"이라는 메세지로 바꿔주세요!
         return ResponseEntity.ok(message);
     }
-
-
-
 }
