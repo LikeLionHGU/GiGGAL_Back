@@ -1,9 +1,8 @@
 package com.example.demo.memo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.demo.Book.Book;
+import com.example.demo.User.User;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Builder
@@ -16,13 +15,20 @@ public class Memo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memoId;
-    private String bookId;
     private String content;
     private String date;
 
-    public static Memo from(MemoRequest memoRequest, String id) {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
+
+    public static Memo createMemo(MemoRequest memoRequest, User loginUser, Book myBook) {
         return  Memo.builder()
-                .bookId(id)
+                .user(loginUser)
+                .book(myBook)
                 .content(memoRequest.getContent())
                 .date(memoRequest.getDate())
                 .build();

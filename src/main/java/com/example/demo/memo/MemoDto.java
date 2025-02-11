@@ -11,21 +11,21 @@ import java.net.URL;
 @NoArgsConstructor
 public class MemoDto {
 
-    private String bookId;
+    private String bookTitle;
     private String content;
     private String date;
 
-    public static MemoDto from(Memo memo) {
+    public static MemoDto from(Memo memo, String title) {
         return MemoDto.builder()
-                .bookId(memo.getBookId())
+                .bookTitle(title)
                 .content(memo.getContent())
                 .date(memo.getDate())
                 .build();
     }
 
-    public static MemoDto from(MemoRequest request, String id) {
+    public static MemoDto from(MemoRequest request, String title) {
         return MemoDto.builder()
-                .bookId(id)
+                .bookTitle(title)
                 .content(request.getContent())
                 .date(request.getDate())
                 .build();

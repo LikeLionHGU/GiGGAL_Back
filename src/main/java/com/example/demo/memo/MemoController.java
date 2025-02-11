@@ -28,7 +28,7 @@ public class MemoController {
     @DeleteMapping("/delete/{memoId}")
     public ResponseEntity<String> deleteMemo(@PathVariable Long memoId) {
         memoService.deleteMemo(memoId);
-        String message = "메모 삭제 완료!";
+        String message = "메모 삭제 성공!";
         return ResponseEntity.ok(message);
     }
 }
