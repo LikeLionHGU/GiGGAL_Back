@@ -11,6 +11,7 @@ import java.net.URL;
 @Setter
 public class BookResponseWithDifficulty {
 
+    private String bookId;
     private String title;
     private String author;
     private String publisher;

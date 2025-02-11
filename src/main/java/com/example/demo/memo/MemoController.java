@@ -19,11 +19,11 @@ public class MemoController {
         return ResponseEntity.ok(MemoResponseAboutMemoId.from(memoId, message));
     }
 
-    @GetMapping("/list/{bookId}")
-    public ResponseEntity<List<MemoResponse>> findMemosOfTheUser(@PathVariable Long bookId) {
-        List<MemoDto> memoDtos = memoService.findMemosOfTheUser(bookId);
-        return ResponseEntity.ok(memoDtos.stream().map(MemoResponse::from).toList());
-    }
+//    @GetMapping("/list/{bookId}")
+//    public ResponseEntity<List<MemoResponse>> findMemosOfTheUser(@PathVariable Long bookId) {
+//        List<MemoDto> memoDtos = memoService.findMemosOfTheUser(bookId);
+//        return ResponseEntity.ok(memoDtos.stream().map(MemoResponse::from).toList());
+//    }
 
     @DeleteMapping("/delete/{memoId}")
     public ResponseEntity<String> deleteMemo(@PathVariable Long memoId) {

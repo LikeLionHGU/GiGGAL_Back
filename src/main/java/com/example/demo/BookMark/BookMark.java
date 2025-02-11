@@ -24,8 +24,6 @@ public class BookMark {
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
-    @OneToMany(mappedBy = "BookMark", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Memo> memos = new ArrayList<>();
 
     public static BookMark from(Book requestBook) {
         return BookMark.builder()
