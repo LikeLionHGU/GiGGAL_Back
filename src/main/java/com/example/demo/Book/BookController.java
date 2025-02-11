@@ -18,8 +18,8 @@ public class BookController {
     private final BookRepository bookRepository;
     private final BookMarkService bookMarkService;
 
-    @PostMapping("/book/mark/{user_email}")
-    public ResponseEntity<String> createBookAndBookMark(@PathVariable String user_email, @RequestBody BookRequest bookRequest) {
+    @PostMapping("/book/mark")
+    public ResponseEntity<String> createBookAndBookMark( @RequestBody BookRequest bookRequest) {
         bookService.createBook(bookRequest);
         Book requestBook = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
         String message = bookMarkService.addBookMark(requestBook);
