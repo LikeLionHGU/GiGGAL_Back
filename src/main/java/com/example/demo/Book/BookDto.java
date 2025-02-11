@@ -21,6 +21,7 @@ public class BookDto {
     private URL thumbnail;
     private float difficultyScore;
     private String difficultyState;
+    private int countOfBookMark;
 
 
     public static BookDto from(Book book) {

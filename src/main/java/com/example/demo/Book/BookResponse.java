@@ -11,14 +11,17 @@ import java.net.URL;
 @Setter
 public class BookResponse {
 
+    private String bookId;
     private String title;
     private String author;
     private String publisher;
     private int pageCount;
     private URL thumbnail;
+    private int countOfBookMark;
 
     public static BookResponse from(BookDto bookDto) {
         return BookResponse.builder()
+                .bookId(bookDto.getId())
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
                 .publisher(bookDto.getPublisher())

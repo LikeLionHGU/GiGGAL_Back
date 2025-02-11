@@ -24,13 +24,16 @@ public class MemoService {
         //유저 정보 가져오기
         String userEmail = userService.getUserEmail();
         User user = userRepository.findByEmail(userEmail).orElseThrow(()-> new RuntimeException("User not found"));
-        Book book = bookRepository.findById(bookId).orElseThrow(()-> new RuntimeException("Book not found"));
+        Book book = bookRepository.findById(bookId);
+        if(book == null) {
+            throw new RuntimeException("Book not found");
+        }
         Memo memo = Memo.createMemo(memoRequest, user, book);
         memoRepository.save(memo);
         return memo.getMemoId();
     }
 
-    public List<MemoDto> findMemosOfTheUser(Long bookID){
+//    public List<MemoDto> findMemosOfTheUser(Long bookID){
 //        List<Memo> memos = memoRepository.findAll();
 //        List<MemoDto> memoDtos = MemoDto.From(memos);
 //        for (Memo eachMemo : memos){
@@ -39,7 +42,7 @@ public class MemoService {
 //            }
 //        }
 //        return memoDtos;
-    }
+//    }
 
     public void deleteMemo(Long memoId){
         memoRepository.deleteById(memoId);
