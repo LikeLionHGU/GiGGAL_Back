@@ -1,12 +1,9 @@
 package com.example.demo.BookMark;
 
 import com.example.demo.Book.Book;
-import com.example.demo.memo.Memo;
+import com.example.demo.User.User;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Setter
 @Getter
@@ -19,17 +16,22 @@ public class BookMark {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String status;
-    private String time;
+    private int time;
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    public static BookMark from(Book requestBook) {
+    @ManyToOne
+    @JoinColumn(name = "user_email", nullable = false)
+    private User user;
+
+    public static BookMark from(Book requestBook, User requestUser) {
         return BookMark.builder()
+                .user(requestUser)
                 .book(requestBook)
                 .status("읽기 전")
-                .time("0")
+                .time(0)
                 .build();
     }
 

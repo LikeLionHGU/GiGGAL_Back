@@ -20,13 +20,26 @@ public class BookMarkDto {
     private String time;
 
     public static BookMarkDto from(BookMark bookMark) {
+        String timeForString = timeToString(bookMark);
+
         return BookMarkDto.builder()
                 .id(bookMark.getId())
                 .bookId(bookMark.getBook().getId())
                 .bookTitle(bookMark.getBook().getTitle())
                 .status(bookMark.getStatus())
-                .time(bookMark.getTime())
+                .time(timeForString)
                 .build();
+    }
+
+    public static String timeToString(BookMark bookMark) {
+        String readingTimeByString = null;
+
+        if(bookMark.getTime() < 60) {
+            readingTimeByString = "" + bookMark.getTime();
+        }else{
+            readingTimeByString = bookMark.getTime() / 60 + "시간 " + bookMark.getTime() % 60 + "분";
+        }
+        return readingTimeByString;
     }
 
     public static List<BookMarkDto> from(List<BookMark> bookMarks) {

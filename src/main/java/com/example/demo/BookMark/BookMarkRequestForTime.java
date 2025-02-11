@@ -1,11 +1,18 @@
 package com.example.demo.BookMark;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BookMarkRequestForTime {
 
-    private String time;
+    private int time;
 
-    public BookMarkRequestForTime(String time) {
+    public BookMarkRequestForTime(int time) {
         this.time = time;
     }
+
+
 
 }
