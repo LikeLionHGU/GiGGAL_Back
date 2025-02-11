@@ -37,3 +37,4 @@ public class BookController {
         List<BookResponseWithDifficulty> bookResponseWithDifficulties = bookService.getBooksWithDifficulty(bookRequestForListUp).stream().map(BookResponseWithDifficulty::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithDifficulties);
     }
+}

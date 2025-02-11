@@ -1,8 +1,12 @@
 package com.example.demo.BookMark;
 
 import com.example.demo.Book.Book;
+import com.example.demo.memo.Memo;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -20,6 +24,8 @@ public class BookMark {
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
+    @OneToMany(mappedBy = "BookMark", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Memo> memos = new ArrayList<>();
 
     public static BookMark from(Book requestBook) {
         return BookMark.builder()

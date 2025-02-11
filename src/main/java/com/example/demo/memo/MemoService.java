@@ -1,5 +1,10 @@
 package com.example.demo.memo;
 
+import com.example.demo.Book.Book;
+import com.example.demo.Book.BookRepository;
+import com.example.demo.User.User;
+import com.example.demo.User.UserRepository;
+import com.example.demo.User.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,27 +15,33 @@ import java.util.List;
 @AllArgsConstructor
 public class MemoService {
 
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
     private final MemoRepository memoRepository;
 
     public Long addMemo(MemoRequest memoRequest, String bookId) {
-        Memo memo = Memo.from(memoRequest, bookId);
+        //유저 정보 가져오기
+        String userEmail = userService.getUserEmail();
+        User user = userRepository.findByEmail(userEmail).orElseThrow(()-> new RuntimeException("User not found"));
+        Book book = bookRepository.findById(bookId).orElseThrow(()-> new RuntimeException("Book not found"));
+        Memo memo = Memo.createMemo(memoRequest, user, book);
         memoRepository.save(memo);
         return memo.getMemoId();
     }
 
     public List<MemoDto> findMemosOfTheUser(Long bookID){
-        List<Memo> memos = memoRepository.findAll();
-        List<MemoDto> memoDtos = new ArrayList<>();
-        for (Memo eachMemo : memos){
+//        List<Memo> memos = memoRepository.findAll();
+//        List<MemoDto> memoDtos = MemoDto.From(memos);
+//        for (Memo eachMemo : memos){
 //            if (eachMemo.){
 //                memoDtos.add(MemoDto.from(eachMemo));
 //            }
-            // 사용자 아이디 저장 문제 해결되면 이어서 진행하기
-        }
-        return memoDtos;
+//        }
+//        return memoDtos;
     }
 
-    public void deleteMemo(Long bookID){
-        memoRepository.deleteById(bookID);
+    public void deleteMemo(Long memoId){
+        memoRepository.deleteById(memoId);
     }
 }
