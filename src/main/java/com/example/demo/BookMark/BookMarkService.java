@@ -1,20 +1,15 @@
 package com.example.demo.BookMark;
 
 import com.example.demo.Book.Book;
-import com.example.demo.Book.BookDto;
 import com.example.demo.Book.BookRepository;
 import com.example.demo.User.User;
 import com.example.demo.User.UserRepository;
 import com.example.demo.User.UserService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -57,5 +52,11 @@ public class BookMarkService {
         BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
         targetBookMark.setStatus("완독");
         return targetBookMark.getStatus();
+    }
+
+    public List<BookMarkDtoList> makeBookMarkListOfBeforeReading(){
+        String email = userService.getUserEmail();
+        List<BookMark> BookMarkListOfBeforeReading = bookMarkRepository.findByUserEmailAndStatus(email, "읽기 전");
+        return BookMarkDtoList.from(BookMarkListOfBeforeReading);
     }
 }
