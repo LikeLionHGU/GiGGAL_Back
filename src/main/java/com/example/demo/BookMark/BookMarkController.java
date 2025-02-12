@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/book")
 public class BookMarkController {
 
     private final BookMarkService bookMarkService;
 
-    @PutMapping("/reading/time{bookId}")
+    @PutMapping("/reading/time/{bookId}")
     public ResponseEntity<String> updateReadingTime(@PathVariable String bookId, @RequestBody BookMarkRequestForTime request) {
         String result = bookMarkService.updateReadingTime(bookId, request);
         return ResponseEntity.ok().body(result);

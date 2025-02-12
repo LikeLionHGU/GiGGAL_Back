@@ -26,6 +26,7 @@ public class Book {
     private URL thumbnail;
     private int countForDifficulty;
     private int difficultyScore;
+    private int countOfBookMark;
 
 
     @OneToMany(
@@ -49,6 +50,7 @@ public class Book {
                 .publisher(request.getPublisher())
                 .pageCount(request.getPageCount())
                 .thumbnail(request.getThumbnail())
+                .countOfBookMark(1)
                 .build();
     }
 }

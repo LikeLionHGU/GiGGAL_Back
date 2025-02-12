@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/memo")
 public class MemoController {
 
     private final MemoService memoService;

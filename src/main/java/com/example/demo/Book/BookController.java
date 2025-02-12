@@ -12,13 +12,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/book")
 public class BookController {
 
     private final BookService bookService;
     private final BookRepository bookRepository;
     private final BookMarkService bookMarkService;
 
-    @PostMapping("/book/mark")
+    @PostMapping("/mark")
     public ResponseEntity<String> createBookAndBookMark( @RequestBody BookRequest bookRequest) {
         bookService.createBook(bookRequest);
         Book requestBook = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
@@ -26,15 +27,21 @@ public class BookController {
         return ResponseEntity.ok(message);
     }
 
-    @PutMapping("/book/difficulty/{bookId}")
+    @PutMapping("/difficulty/{bookId}")
     public ResponseEntity<String> updateBookDifficulty(@PathVariable String bookId, @RequestBody BookRequestForDifficulty bookRequestForDifficulty) {
         bookService.editBookDifficulty(bookId, bookRequestForDifficulty);
         return ResponseEntity.ok().body("난이도 평가 완료!");
     }
 
-    @GetMapping("/book/rankingOfDifficulty")
+    @GetMapping("/ranking/difficulty")
     public ResponseEntity<List<BookResponseWithDifficulty>> getListOfBookWithDifficulty(@RequestBody BookRequestForListUp bookRequestForListUp) {
         List<BookResponseWithDifficulty> bookResponseWithDifficulties = bookService.getBooksWithDifficulty(bookRequestForListUp).stream().map(BookResponseWithDifficulty::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithDifficulties);
+    }
+
+    @GetMapping("/ranking/bookmark")
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> getListOfBookWithBookMark(@RequestBody BookRequestForListUp bookRequestForListUp) {
+        List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookService.getBooksWithBookMarkCount(bookRequestForListUp).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
 }

@@ -20,7 +20,20 @@ public class BookService {
         Book book = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
         if(book == null) {
            BookDto bookDto = BookDto.from(bookRepository.save(Book.from(bookRequest)));
+        }else{
+            updateBookMarkCount(book);
         }
+    }
+
+    @Transactional
+    public void updateBookMarkCount(Book book){
+        int originalCountOfBookMark = book.getCountOfBookMark();
+        book.setCountOfBookMark(originalCountOfBookMark + 1);
+    }
+
+    public List<BookDto> getBooksWithBookMarkCount(BookRequestForListUp bookRequestForListUp) {
+        List<BookDto> bookDtoList = bookRepository.findAll().stream().map(BookDto::from).collect(Collectors.toList());
+        return bookDtoList;
     }
 
     @Transactional
