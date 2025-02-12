@@ -19,12 +19,12 @@ public class BookMark {
     private int time;
 
     @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
-
-    @ManyToOne
     @JoinColumn(name = "user_email", nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
     public static BookMark from(Book requestBook, User requestUser) {
         return BookMark.builder()
@@ -34,5 +34,4 @@ public class BookMark {
                 .time(0)
                 .build();
     }
-
 }
