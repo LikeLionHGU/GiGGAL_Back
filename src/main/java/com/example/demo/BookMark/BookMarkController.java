@@ -1,7 +1,6 @@
 package com.example.demo.BookMark;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +17,9 @@ public class BookMarkController {
     }
 
     @GetMapping("/reading/time/{bookId}")
-    public ResponseEntity<BookMarkResponseForTime> getReadingTime(@PathVariable String bookId) {
+    public ResponseEntity<String> getReadingTime(@PathVariable String bookId) {
         BookMarkDto bookMarkDto = bookMarkService.getReadingTime(bookId);
-        return ResponseEntity.ok().body(BookMarkResponseForTime.from(bookMarkDto));
+        return ResponseEntity.ok().body(bookMarkDto.getTime());
     }
 
 }
