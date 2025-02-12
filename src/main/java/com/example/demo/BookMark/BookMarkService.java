@@ -68,4 +68,10 @@ public class BookMarkService {
         List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽는 중").stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
+
+    public List<BookDto> makeBookListOfAfterReading(){
+        String email = userService.getUserEmail();
+        List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "완독").stream().map(BookDto::from).collect(Collectors.toList());
+        return bookDtoList;
+    }
 }

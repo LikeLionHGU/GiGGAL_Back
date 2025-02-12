@@ -51,4 +51,10 @@ public class BookMarkController {
         List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfNowReading().stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
+
+    @GetMapping("/list/after/reading")
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfAfterReading(){
+        List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfAfterReading().stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
+    }
 }
