@@ -19,7 +19,7 @@ public class BookController {
     private final BookRepository bookRepository;
     private final BookMarkService bookMarkService;
 
-    @PostMapping("/mark")
+    @PostMapping("/bookmark")
     public ResponseEntity<String> createBookAndBookMark( @RequestBody BookRequest bookRequest) {
         bookService.createBook(bookRequest);
         Book requestBook = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
