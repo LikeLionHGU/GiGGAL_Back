@@ -1,6 +1,7 @@
 package com.example.demo.Book;
 
 import com.example.demo.BookMark.BookMark;
+import com.example.demo.memo.Memo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,13 @@ public class Book {
             cascade = CascadeType.ALL
     )
     private List<BookMark> bookMarks = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "book",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    private List<Memo> memos = new ArrayList<>();
 
     public static Book from(BookRequest request) {
         return  Book.builder()

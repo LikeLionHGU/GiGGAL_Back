@@ -19,8 +19,9 @@ public class Memo {
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_email", nullable = false)
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
