@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/book")
@@ -33,5 +35,11 @@ public class BookMarkController {
     public ResponseEntity<String> changeStatusToComplete(@PathVariable String bookId){
         String message = bookMarkService.changeStatusToComplete(bookId);
         return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/list/before/reading")
+    public ResponseEntity<List<BookMarkResponse>> makeListOfBeforeReading(){
+        List<BookMarkDtoList> bookMarkDtoList = bookMarkService.makeBookMarkListOfBeforeReading();
+        return ResponseEntity.ok(BookMarkResponse.from(bookMarkDtoList));
     }
 }
