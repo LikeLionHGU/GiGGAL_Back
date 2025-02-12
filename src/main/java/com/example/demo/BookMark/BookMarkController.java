@@ -22,4 +22,15 @@ public class BookMarkController {
         return ResponseEntity.ok().body(bookMarkDto.getTime());
     }
 
+    @PutMapping("/reading/{bookId}")
+    public ResponseEntity<String> changeStatusToReading(@PathVariable String bookId){
+        String message = bookMarkService.changeStatusToReading(bookId);
+        return ResponseEntity.ok(message);
+    }
+
+    @PutMapping("/complete/{bookId}")
+    public ResponseEntity<String> changeStatusToComplete(@PathVariable String bookId){
+        String message = bookMarkService.changeStatusToComplete(bookId);
+        return ResponseEntity.ok(message);
+    }
 }
