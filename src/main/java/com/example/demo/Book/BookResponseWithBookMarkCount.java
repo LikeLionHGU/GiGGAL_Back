@@ -9,7 +9,7 @@ import java.net.URL;
 @Builder
 @Getter
 @Setter
-public class BookResponse {
+public class BookResponseWithBookMarkCount {
 
     private String bookId;
     private String title;
@@ -19,14 +19,15 @@ public class BookResponse {
     private URL thumbnail;
     private int countOfBookMark;
 
-    public static BookResponse from(BookDto bookDto) {
-        return BookResponse.builder()
+    public static BookResponseWithBookMarkCount from(BookDto bookDto) {
+        return BookResponseWithBookMarkCount.builder()
                 .bookId(bookDto.getId())
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
                 .publisher(bookDto.getPublisher())
                 .pageCount(bookDto.getPageCount())
                 .thumbnail(bookDto.getThumbnail())
+                .countOfBookMark(bookDto.getCountOfBookMark())
                 .build();
     }
 

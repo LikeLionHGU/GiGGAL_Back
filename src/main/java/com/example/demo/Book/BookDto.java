@@ -44,6 +44,7 @@ public class BookDto {
                 .thumbnail(book.getThumbnail())
                 .difficultyScore(averageScoreForDifficulty)
                 .difficultyState(stateForDifficulty)
+                .countOfBookMark(book.getCountOfBookMark())
                 .build();
     }
 
