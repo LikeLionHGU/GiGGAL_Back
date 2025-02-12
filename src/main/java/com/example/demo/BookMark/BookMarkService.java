@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -46,4 +47,15 @@ public class BookMarkService {
         return bookMarkDto;
     }
 
+    public String changeStatusToReading(String bookId){
+        BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
+        targetBookMark.setStatus("읽는 중");
+        return targetBookMark.getStatus();
+    }
+
+    public String changeStatusToComplete(String bookId){
+        BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
+        targetBookMark.setStatus("완독");
+        return targetBookMark.getStatus();
+    }
 }
