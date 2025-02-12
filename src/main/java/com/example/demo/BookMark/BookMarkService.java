@@ -1,7 +1,9 @@
 package com.example.demo.BookMark;
 
 import com.example.demo.Book.Book;
+import com.example.demo.Book.BookDto;
 import com.example.demo.Book.BookRepository;
+import com.example.demo.Book.BookResponseWithBookMarkCount;
 import com.example.demo.User.User;
 import com.example.demo.User.UserRepository;
 import com.example.demo.User.UserService;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,9 +57,15 @@ public class BookMarkService {
         return targetBookMark.getStatus();
     }
 
-    public List<BookMarkDtoList> makeBookMarkListOfBeforeReading(){
+    public List<BookDto> makeBookListOfBeforeReading(){
         String email = userService.getUserEmail();
-        List<BookMark> BookMarkListOfBeforeReading = bookMarkRepository.findByUserEmailAndStatus(email, "읽기 전");
-        return BookMarkDtoList.from(BookMarkListOfBeforeReading);
+        List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽기 전").stream().map(BookDto::from).collect(Collectors.toList());
+        return bookDtoList;
+    }
+
+    public List<BookDto> makeBookListOfNowReading(){
+        String email = userService.getUserEmail();
+        List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽는 중").stream().map(BookDto::from).collect(Collectors.toList());
+        return bookDtoList;
     }
 }

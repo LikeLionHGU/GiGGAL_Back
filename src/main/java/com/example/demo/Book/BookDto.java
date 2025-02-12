@@ -1,5 +1,6 @@
 package com.example.demo.Book;
 
+import com.example.demo.BookMark.BookMark;
 import lombok.*;
 
 import java.net.URL;
@@ -45,6 +46,18 @@ public class BookDto {
                 .difficultyScore(averageScoreForDifficulty)
                 .difficultyState(stateForDifficulty)
                 .countOfBookMark(book.getCountOfBookMark())
+                .build();
+    }
+
+    public static BookDto from(BookMark bookMark) {
+        return BookDto.builder()
+                .id(bookMark.getBook().getId())
+                .title(bookMark.getBook().getTitle())
+                .author(bookMark.getBook().getAuthor())
+                .pageCount(bookMark.getBook().getPageCount())
+                .publisher(bookMark.getBook().getPublisher())
+                .thumbnail(bookMark.getBook().getThumbnail())
+                .countOfBookMark(bookMark.getBook().getCountOfBookMark())
                 .build();
     }
 

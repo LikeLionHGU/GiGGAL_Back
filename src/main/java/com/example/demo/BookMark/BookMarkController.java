@@ -1,10 +1,13 @@
 package com.example.demo.BookMark;
 
+import com.example.demo.Book.BookResponseWithBookMarkCount;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -38,8 +41,14 @@ public class BookMarkController {
     }
 
     @GetMapping("/list/before/reading")
-    public ResponseEntity<List<BookMarkResponse>> makeListOfBeforeReading(){
-        List<BookMarkDtoList> bookMarkDtoList = bookMarkService.makeBookMarkListOfBeforeReading();
-        return ResponseEntity.ok(BookMarkResponse.from(bookMarkDtoList));
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfBeforeReading(){
+        List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfBeforeReading().stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
+    }
+
+    @GetMapping("/list/now/reading")
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfNowReading(){
+        List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfNowReading().stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
 }
