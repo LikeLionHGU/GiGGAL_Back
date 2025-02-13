@@ -26,7 +26,7 @@ public class BookDto {
 
 
     public static BookDto from(Book book) {
-        float averageScoreForDifficulty = (float) book.getDifficultyScore()/book.getPageCount();
+        float averageScoreForDifficulty = ((float) book.getDifficultyScore())/((float) book.getCountForDifficulty());
         String stateForDifficulty  = null;
         if(averageScoreForDifficulty > 3.5) {
             stateForDifficulty = "관련 지식이 필요해요.";

@@ -39,20 +39,23 @@ public class BookService {
     @Transactional
     public void editBookDifficulty(Long bookId, BookRequestForDifficulty bookRequestForDifficulty) {
         Book book = bookRepository.findById(bookId).get();
-        int originalDifficultyCount = book.getCountForDifficulty();
-        int originalDifficultyScore = book.getDifficultyScore();
+        int totalDifficultyCount = book.getCountForDifficulty();
+        int totalDifficultyScore = book.getDifficultyScore();
+
         if(bookRequestForDifficulty.getDifficulty().equals("hard")){
-            book.setCountForDifficulty(originalDifficultyCount + 1);
-            book.setCountForDifficulty(originalDifficultyScore + 5);
+            totalDifficultyScore += 5;
+            totalDifficultyCount += 1;
         } else if (bookRequestForDifficulty.getDifficulty().equals("normal")) {
-            book.setCountForDifficulty(originalDifficultyCount + 1);
-            book.setCountForDifficulty(originalDifficultyScore + 3);
+            totalDifficultyScore += 3;
+            totalDifficultyCount += 1;
         }else if(bookRequestForDifficulty.getDifficulty().equals("easy")){
-            book.setCountForDifficulty(originalDifficultyCount + 1);
-            book.setCountForDifficulty(originalDifficultyScore + 1);
+            totalDifficultyScore += 1;
+            totalDifficultyCount += 1;
         }else{
             throw new IllegalArgumentException("Invalid difficulty");
         }
+        book.setDifficultyScore(totalDifficultyScore);
+        book.setCountForDifficulty(totalDifficultyCount);
     }
 
     public List<BookDto> getBooksWithDifficulty(BookRequestForListUp bookRequestForListUp) {
