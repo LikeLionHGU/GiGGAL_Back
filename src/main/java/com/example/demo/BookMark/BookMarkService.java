@@ -44,12 +44,14 @@ public class BookMarkService {
         return bookMarkDto;
     }
 
+    @Transactional
     public String changeStatusToReading(Long bookId){
         BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
         targetBookMark.setStatus("읽는 중");
         return targetBookMark.getStatus();
     }
 
+    @Transactional
     public String changeStatusToComplete(Long bookId){
         BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
         targetBookMark.setStatus("완독");
