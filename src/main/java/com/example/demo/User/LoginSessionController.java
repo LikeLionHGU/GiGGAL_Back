@@ -7,6 +7,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +27,10 @@ public class LoginSessionController {
     @Value("${google.oauth.client-id}")
     private String clientId;
 
-    @Autowired
-    private final HttpSession session;
     private final UserService userService;
 
     @PostMapping("/google/session")
-    public ResponseEntity<Map<String, Object>> googleLogin(@RequestParam String credential) {
+    public ResponseEntity<Map<String, Object>> googleLogin(@RequestParam String credential, HttpSession session) {
         // ID Token 검증 및 사용자 정보 추출
         HttpTransport transport = new NetHttpTransport();
         JsonFactory jsonFactory = new GsonFactory();

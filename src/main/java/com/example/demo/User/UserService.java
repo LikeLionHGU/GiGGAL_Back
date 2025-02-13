@@ -13,7 +13,6 @@ import java.util.Optional;
 public class UserService {
 
    private final UserRepository userRepository;
-   @Autowired
    private final HttpSession session;
 
     public User saveOrUpdate(String email, String name) {
