@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
-@SessionAttributes("user")
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class LoginSessionController {
