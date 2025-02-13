@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
+@SessionAttributes("user")
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class LoginSessionController {
@@ -52,7 +53,6 @@ public class LoginSessionController {
                 // 세션 객체에 사용자 정보 저장
                 session.setAttribute("email", email);
                 session.setAttribute("nickName", nickName);
-                System.out.println("Email: " + session.getAttribute("email"));
 
                 return ResponseEntity.ok(Collections.singletonMap("status", "success"));
             } else {

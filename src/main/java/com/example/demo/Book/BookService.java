@@ -28,7 +28,6 @@ public class BookService {
 
     public void updateBookMarkCount(Book book){
         int newCountOfBookMark = book.getCountOfBookMark() + 1;
-        System.out.println("New Book Mark: " + newCountOfBookMark);
         book.setCountOfBookMark(newCountOfBookMark);
     }
 
