@@ -16,6 +16,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
+    @Transactional
     public void createBook(BookRequest bookRequest) {
         Book book = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
         if(book == null) {
@@ -25,10 +26,10 @@ public class BookService {
         }
     }
 
-    @Transactional
     public void updateBookMarkCount(Book book){
-        int originalCountOfBookMark = book.getCountOfBookMark();
-        book.setCountOfBookMark(originalCountOfBookMark + 1);
+        int newCountOfBookMark = book.getCountOfBookMark() + 1;
+        System.out.println("New Book Mark: " + newCountOfBookMark);
+        book.setCountOfBookMark(newCountOfBookMark);
     }
 
     public List<BookDto> getBooksWithBookMarkCount(BookRequestForListUp bookRequestForListUp) {
