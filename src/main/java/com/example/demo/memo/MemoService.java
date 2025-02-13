@@ -32,7 +32,7 @@ public class MemoService {
         }
         Memo memo = Memo.createMemo(memoRequest, user, book);
         memoRepository.save(memo);
-        return memo.getMemoId();
+        return memo.getId();
     }
 
     public List<MemoDto> findMemosOfTheUser(String bookId){
