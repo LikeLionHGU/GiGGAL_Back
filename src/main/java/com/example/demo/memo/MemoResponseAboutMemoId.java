@@ -8,12 +8,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemoResponseAboutMemoId {
-    private Long memoId;
+    private Long id;
     private String message;
 
     public static MemoResponseAboutMemoId from(Long id, String successMessage) {
         return MemoResponseAboutMemoId.builder()
-                .memoId(id)
+                .id(id)
                 .message(successMessage)
                 .build();
     }

@@ -14,7 +14,7 @@ import lombok.*;
 public class Memo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memoId;
+    private Long id;
     private String content;
     private String date;
 
