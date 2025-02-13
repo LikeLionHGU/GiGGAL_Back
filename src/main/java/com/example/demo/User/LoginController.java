@@ -7,6 +7,8 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class LoginController {
 
     @Value("${google.oauth.client-id}")
@@ -27,12 +30,8 @@ public class LoginController {
 
     private final UserService userService;
 
-    public LoginController(UserService userService) {
-        this.userService = userService;
-    }
-
     @PostMapping("/google")
-    public ResponseEntity<Map<String, Object>> google(@RequestParam String credential) {
+    public ResponseEntity<Map<String, Object>> google(@RequestParam String credential, HttpSession session) {
         HttpTransport transport = new NetHttpTransport();
         JsonFactory jsonFactory = new GsonFactory();
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)

@@ -3,6 +3,7 @@ package com.example.demo.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class UserService {
 
    private final UserRepository userRepository;
+   @Autowired
    private final HttpSession session;
 
     public User saveOrUpdate(String email, String name) {

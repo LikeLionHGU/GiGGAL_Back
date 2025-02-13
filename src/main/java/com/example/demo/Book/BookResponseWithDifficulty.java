@@ -11,7 +11,7 @@ import java.net.URL;
 @Setter
 public class BookResponseWithDifficulty {
 
-    private String bookId;
+    private Long bookId;
     private String title;
     private String author;
     private String publisher;
@@ -22,6 +22,7 @@ public class BookResponseWithDifficulty {
 
     public static BookResponseWithDifficulty from(BookDto bookDto) {
         return BookResponseWithDifficulty.builder()
+                .bookId(bookDto.getId())
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
                 .publisher(bookDto.getPublisher())

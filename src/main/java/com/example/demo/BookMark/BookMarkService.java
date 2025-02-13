@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class BookMarkService {
 
     private final BookMarkRepository bookMarkRepository;
-    private final BookRepository bookRepository;
     private final UserService userService;
     private final UserRepository userRepository;
 
@@ -31,7 +30,7 @@ public class BookMarkService {
     }
 
     @Transactional
-    public String updateReadingTime(String bookId, BookMarkRequestForTime request) {
+    public String updateReadingTime(Long bookId, BookMarkRequestForTime request) {
         String email = userService.getUserEmail();
         BookMark bookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, email);
         int originalTime = bookMark.getTime();
@@ -39,19 +38,19 @@ public class BookMarkService {
         return "시간 저장 성공!";
     }
 
-    public BookMarkDto getReadingTime(String bookId) {
+    public BookMarkDto getReadingTime(Long bookId) {
         String email = userService.getUserEmail();
         BookMarkDto bookMarkDto = BookMarkDto.from(bookMarkRepository.findByBookIdAndUserEmail(bookId, email));
         return bookMarkDto;
     }
 
-    public String changeStatusToReading(String bookId){
+    public String changeStatusToReading(Long bookId){
         BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
         targetBookMark.setStatus("읽는 중");
         return targetBookMark.getStatus();
     }
 
-    public String changeStatusToComplete(String bookId){
+    public String changeStatusToComplete(Long bookId){
         BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
         targetBookMark.setStatus("완독");
         return targetBookMark.getStatus();

@@ -11,7 +11,7 @@ import java.net.URL;
 @Setter
 public class BookResponseWithBookMarkCount {
 
-    private String bookId;
+    private Long bookId;
     private String title;
     private String author;
     private String publisher;

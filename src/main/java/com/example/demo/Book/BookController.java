@@ -1,6 +1,7 @@
 package com.example.demo.Book;
 
 import com.example.demo.BookMark.BookMarkService;
+import com.example.demo.User.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +19,20 @@ public class BookController {
     private final BookService bookService;
     private final BookRepository bookRepository;
     private final BookMarkService bookMarkService;
+    private final UserService userService;
 
     @PostMapping("/bookmark")
-    public ResponseEntity<String> createBookAndBookMark( @RequestBody BookRequest bookRequest) {
+    public ResponseEntity<String> createBookAndBookMark(@RequestBody BookRequest bookRequest) {
         bookService.createBook(bookRequest);
+        String email = userService.getUserEmail();
+        System.out.println("Email: " + email);
         Book requestBook = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
         String message = bookMarkService.addBookMark(requestBook);
         return ResponseEntity.ok(message);
     }
 
     @PutMapping("/difficulty/{bookId}")
-    public ResponseEntity<String> updateBookDifficulty(@PathVariable String bookId, @RequestBody BookRequestForDifficulty bookRequestForDifficulty) {
+    public ResponseEntity<String> updateBookDifficulty(@PathVariable Long bookId, @RequestBody BookRequestForDifficulty bookRequestForDifficulty) {
         bookService.editBookDifficulty(bookId, bookRequestForDifficulty);
         return ResponseEntity.ok().body("난이도 평가 완료!");
     }

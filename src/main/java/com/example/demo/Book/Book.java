@@ -17,8 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Book {
 
-    @Id
-    private String id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String author;
     private String publisher;

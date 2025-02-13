@@ -37,8 +37,8 @@ public class BookService {
     }
 
     @Transactional
-    public void editBookDifficulty(String bookId, BookRequestForDifficulty bookRequestForDifficulty) {
-        Book book = bookRepository.findById(bookId);
+    public void editBookDifficulty(Long bookId, BookRequestForDifficulty bookRequestForDifficulty) {
+        Book book = bookRepository.findById(bookId).get();
         int originalDifficultyCount = book.getCountForDifficulty();
         int originalDifficultyScore = book.getDifficultyScore();
         if(bookRequestForDifficulty.getDifficulty().equals("hard")){

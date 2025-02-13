@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class BookMarkDto {
 
     private Long id;
-    private String bookId;
+    private Long bookId;
     private String userEmail;
     private String bookTitle;
     private String status;

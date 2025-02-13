@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,13 +21,13 @@ public class MemoService {
     private final BookRepository bookRepository;
     private final MemoRepository memoRepository;
 
-    public Long addMemo(MemoRequest memoRequest, String bookId) {
+    public Long addMemo(MemoRequest memoRequest, Long bookId) {
         String userEmail = userService.getUserEmail();
         User user = userRepository.findByEmail(userEmail);
         if(user == null){
             throw new RuntimeException("User not found");
         }
-        Book book = bookRepository.findById(bookId);
+        Book book = bookRepository.findById(bookId).get();
         if(book == null) {
             throw new RuntimeException("Book not found");
         }
@@ -35,16 +36,11 @@ public class MemoService {
         return memo.getId();
     }
 
-    public List<MemoDto> findMemosOfTheUser(String bookId){
-        List<Memo> memos = memoRepository.findAll();
-        List<MemoDto> memoDtos = new ArrayList<>();
+    public List<MemoDto> findMemosOfTheUser(Long bookId){
+        Book book = bookRepository.findById(bookId).get();
+        User user = userRepository.findByEmail(userService.getUserEmail());
 
-        for (Memo eachMemo : memos){
-            if (eachMemo.getBook().getId().equals(bookId) && eachMemo.getUser().getEmail().equals(userService.getUserEmail())){
-                String bookTitle = bookRepository.findById(bookId).getTitle();
-                memoDtos.add(MemoDto.from(eachMemo, bookTitle));
-            }
-        }
+        List<MemoDto> memoDtos = memoRepository.findByBookAndUser(book, user).stream().map(MemoDto::from).collect(Collectors.toList());
         return memoDtos;
     }
 
