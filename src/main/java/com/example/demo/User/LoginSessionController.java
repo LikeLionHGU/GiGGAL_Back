@@ -81,7 +81,7 @@ public class LoginSessionController {
     @PutMapping("/user/session/out")
     public ResponseEntity<Map<String, Object>> logout(HttpSession session) {
         session.setAttribute("email", null);
-        session.setAttribute("name", null);
+        session.setAttribute("nickName", null);
         return ResponseEntity.ok(Collections.singletonMap("status", "logout"));
     }
 }
