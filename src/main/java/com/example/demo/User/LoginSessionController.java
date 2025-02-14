@@ -30,7 +30,7 @@ public class LoginSessionController {
     private final UserService userService;
 
     @PostMapping("/google/session")
-    public ResponseEntity<Map<String, Object>> googleLogin(@RequestParam String credential, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> googleLogin(@RequestParam String credential, HttpSession session) {
         // ID Token 검증 및 사용자 정보 추출
         HttpTransport transport = new NetHttpTransport();
         JsonFactory jsonFactory = new GsonFactory();
@@ -48,8 +48,6 @@ public class LoginSessionController {
                 String nickName = email.substring(0, index);
 
                 userService.saveOrUpdate(email, nickName);
-
-                HttpSession session = request.getSession();
 
                 // 세션 객체에 사용자 정보 저장
                 session.setAttribute("email", email);
