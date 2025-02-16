@@ -24,7 +24,7 @@ public class Book {
     private String author;
     private String publisher;
     private int pageCount;
-    private URL thumbnail;
+    private String thumbnail;
     private int countForDifficulty;
     private int difficultyScore;
     private int countOfBookMark;

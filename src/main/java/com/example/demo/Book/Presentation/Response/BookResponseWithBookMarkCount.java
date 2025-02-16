@@ -17,7 +17,7 @@ public class BookResponseWithBookMarkCount {
     private String author;
     private String publisher;
     private int pageCount;
-    private URL thumbnail;
+    private String thumbnail;
     private int countOfBookMark;
 
     public static BookResponseWithBookMarkCount from(BookDto bookDto) {

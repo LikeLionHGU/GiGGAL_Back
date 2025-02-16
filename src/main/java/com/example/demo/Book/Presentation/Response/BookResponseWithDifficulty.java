@@ -17,7 +17,7 @@ public class BookResponseWithDifficulty {
     private String author;
     private String publisher;
     private int pageCount;
-    private URL thumbnail;
+    private String thumbnail;
     private float difficultyScore;
     private String difficultyState;
 

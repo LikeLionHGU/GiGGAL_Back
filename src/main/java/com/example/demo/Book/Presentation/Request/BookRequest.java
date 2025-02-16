@@ -14,9 +14,9 @@ public class BookRequest {
     private String author;
     private String publisher;
     private int pageCount;
-    private URL thumbnail;
+    private String thumbnail;
 
-    public BookRequest(String userEmail, String title, String author, String publisher, int pageCount, URL thumbnail) {
+    public BookRequest(String userEmail, String title, String author, String publisher, int pageCount, String thumbnail) {
         this.userEmail = userEmail;
         this.title = title;
         this.author = author;

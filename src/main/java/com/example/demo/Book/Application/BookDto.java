@@ -20,7 +20,7 @@ public class BookDto {
     private String author;
     private int pageCount;
     private String publisher;
-    private URL thumbnail;
+    private String thumbnail;
     private float difficultyScore;
     private String difficultyState;
     private int countOfBookMark;
