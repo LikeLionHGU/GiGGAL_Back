@@ -25,8 +25,8 @@ public class BookMarkService {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    public String addBookMark(Book requestBook) {
-        String email = userService.getUserEmail();
+    public String addBookMark(Book requestBook, String userEmail) {
+        String email = userEmail;
         User requestUser = userRepository.findByEmail(email);
         Book book = bookRepository.findByTitleAndAuthorAndPublisher(requestBook.getTitle(), requestBook.getAuthor(), requestBook.getPublisher());
         BookMark bookMark = bookMarkRepository.findByBookIdAndUserEmail(requestBook.getId(), email);
@@ -40,47 +40,47 @@ public class BookMarkService {
 
     @Transactional
     public String updateReadingTime(Long bookId, BookMarkRequestForTime request) {
-        String email = userService.getUserEmail();
+        String email = request.getUserEmail();
         BookMark bookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, email);
         int originalTime = bookMark.getTime();
         bookMark.setTime(originalTime + request.getTime());
         return "시간 저장 성공!";
     }
 
-    public BookMarkDto getReadingTime(Long bookId) {
-        String email = userService.getUserEmail();
+    public BookMarkDto getReadingTime(Long bookId, String userEmail) {
+        String email = userEmail;
         BookMarkDto bookMarkDto = BookMarkDto.from(bookMarkRepository.findByBookIdAndUserEmail(bookId, email));
         return bookMarkDto;
     }
 
     @Transactional
-    public String changeStatusToReading(Long bookId){
-        BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
+    public String changeStatusToReading(Long bookId, String userEmail) {
+        BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userEmail);
         targetBookMark.setStatus("읽는 중");
         return targetBookMark.getStatus();
     }
 
     @Transactional
-    public String changeStatusToComplete(Long bookId){
-        BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userService.getUserEmail());
+    public String changeStatusToComplete(Long bookId, String userEmail) {
+        BookMark targetBookMark = bookMarkRepository.findByBookIdAndUserEmail(bookId, userEmail);
         targetBookMark.setStatus("완독");
         return targetBookMark.getStatus();
     }
 
-    public List<BookDto> makeBookListOfBeforeReading(){
-        String email = userService.getUserEmail();
+    public List<BookDto> makeBookListOfBeforeReading(String userEmail) {
+        String email = userEmail;
         List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽기 전").stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
 
-    public List<BookDto> makeBookListOfNowReading(){
-        String email = userService.getUserEmail();
+    public List<BookDto> makeBookListOfNowReading(String userEmail) {
+        String email = userEmail;
         List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽는 중").stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
 
-    public List<BookDto> makeBookListOfAfterReading(){
-        String email = userService.getUserEmail();
+    public List<BookDto> makeBookListOfAfterReading(String userEmail) {
+        String email = userEmail;
         List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "완독").stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
