@@ -9,13 +9,15 @@ import java.net.URL;
 @Setter
 public class BookRequest {
 
+    private String userEmail;
     private String title;
     private String author;
     private String publisher;
     private int pageCount;
     private URL thumbnail;
 
-    public BookRequest(String title, String author, String publisher, int pageCount, URL thumbnail) {
+    public BookRequest(String userEmail, String title, String author, String publisher, int pageCount, URL thumbnail) {
+        this.userEmail = userEmail;
         this.title = title;
         this.author = author;
         this.publisher = publisher;

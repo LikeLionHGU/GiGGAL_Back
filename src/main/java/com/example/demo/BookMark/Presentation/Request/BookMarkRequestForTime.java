@@ -6,9 +6,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookMarkRequestForTime {
-    private int time;
 
-    public BookMarkRequestForTime(int time) {
+    private int time;
+    private String userEmail;
+
+    public BookMarkRequestForTime(int time, String userEmail) {
+
         this.time = time;
+        this.userEmail = userEmail;
+
     }
 }

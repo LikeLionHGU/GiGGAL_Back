@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class MemoRequest {
+
+    private String userEmail;
     private String content;
     private String date;
 }

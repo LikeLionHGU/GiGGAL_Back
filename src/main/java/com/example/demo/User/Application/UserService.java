@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
    private final UserRepository userRepository;
-   private final HttpSession session;
 
     public User saveOrUpdate(String email, String name) {
         User existingUser = userRepository.findByEmail(email);
@@ -24,10 +23,5 @@ public class UserService {
             user.setNickname(name);
             return userRepository.save(user);
         }
-    }
-
-    public String getUserEmail() {
-        String email = (String) session.getAttribute("email");
-        return email;
     }
 }
