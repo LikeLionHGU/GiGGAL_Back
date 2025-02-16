@@ -11,7 +11,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry corsRegistry) {
 
         corsRegistry.addMapping("/**")
-                .allowedOrigins("https://bookgie.netlify.app/")
+                .allowedOrigins("http://localhost:3000/")
                 .allowedMethods("*")
                 .allowCredentials(true);
     }

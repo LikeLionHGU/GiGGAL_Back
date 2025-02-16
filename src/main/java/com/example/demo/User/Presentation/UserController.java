@@ -51,7 +51,7 @@ public class UserController {
                 session.setAttribute("email", email);
                 session.setAttribute("nickName", nickName);
 
-                return ResponseEntity.ok(Collections.singletonMap("status", "success"));
+                return ResponseEntity.ok(Collections.singletonMap("userEmail", email));
             } else {
                 return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Invalid ID token"));
             }
