@@ -63,4 +63,10 @@ public class BookService {
         List<BookDto> bookDtoList = bookRepository.findByTitleContains(keyword).stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
+
+    public BookDto getBookMarkCountAndDifficulty(Long bookId) {
+        Book book = bookRepository.findById(bookId).get();
+        BookDto bookDto = BookDto.from(book);
+        return bookDto;
+    }
 }

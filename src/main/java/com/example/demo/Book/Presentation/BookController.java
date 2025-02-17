@@ -5,6 +5,7 @@ import com.example.demo.Book.Domain.Book;
 import com.example.demo.Book.Domain.BookRepository;
 import com.example.demo.Book.Presentation.Request.BookRequest;
 import com.example.demo.Book.Presentation.Request.BookRequestForDifficulty;
+import com.example.demo.Book.Presentation.Response.BookResponseForBookMarkCountAndDifficulty;
 import com.example.demo.Book.Presentation.Response.BookResponseWithBookMarkCount;
 import com.example.demo.Book.Presentation.Response.BookResponseWithDifficulty;
 import com.example.demo.BookMark.Application.BookMarkService;
@@ -50,5 +51,11 @@ public class BookController {
     public ResponseEntity<List<BookResponseWithBookMarkCount>> getListOfBookWithBookMark(@RequestParam String keyword) {
         List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookService.getBooksWithBookMarkCount(keyword).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
+    }
+
+    @GetMapping("/bookmarkNumber/difficulty/{bookId}")
+    public ResponseEntity<BookResponseForBookMarkCountAndDifficulty> getBookCountAndDifficulty(@PathVariable Long bookId) {
+        BookResponseForBookMarkCountAndDifficulty bookResponse = BookResponseForBookMarkCountAndDifficulty.from(bookService.getBookMarkCountAndDifficulty(bookId));
+        return ResponseEntity.ok().body(bookResponse);
     }
 }
