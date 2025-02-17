@@ -19,6 +19,7 @@ public class BookResponseWithBookMarkCount {
     private int pageCount;
     private String thumbnail;
     private int countOfBookMark;
+    private String isbn;
 
     public static BookResponseWithBookMarkCount from(BookDto bookDto) {
         return BookResponseWithBookMarkCount.builder()
@@ -29,6 +30,7 @@ public class BookResponseWithBookMarkCount {
                 .pageCount(bookDto.getPageCount())
                 .thumbnail(bookDto.getThumbnail())
                 .countOfBookMark(bookDto.getCountOfBookMark())
+                .isbn(bookDto.getIsbn())
                 .build();
     }
 
