@@ -28,7 +28,7 @@ public class Book {
     private int countForDifficulty;
     private int difficultyScore;
     private int countOfBookMark;
-    private String isbn;
+    private String googleBookId;
 
 
     @OneToMany(
@@ -53,7 +53,7 @@ public class Book {
                 .pageCount(request.getPageCount())
                 .thumbnail(request.getThumbnail())
                 .countOfBookMark(1)
-                .isbn(request.getIsbn())
+                .googleBookId(request.getGoogleBookId())
                 .build();
     }
 }

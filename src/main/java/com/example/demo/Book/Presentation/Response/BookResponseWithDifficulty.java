@@ -20,7 +20,7 @@ public class BookResponseWithDifficulty {
     private String thumbnail;
     private float difficultyScore;
     private String difficultyState;
-    private String isbn;
+    private String googleBookId;
 
     public static BookResponseWithDifficulty from(BookDto bookDto) {
         return BookResponseWithDifficulty.builder()
@@ -32,7 +32,7 @@ public class BookResponseWithDifficulty {
                 .thumbnail(bookDto.getThumbnail())
                 .difficultyScore(bookDto.getDifficultyScore())
                 .difficultyState(bookDto.getDifficultyState())
-                .isbn(bookDto.getIsbn())
+                .googleBookId(bookDto.getGoogleBookId())
                 .build();
     }
 

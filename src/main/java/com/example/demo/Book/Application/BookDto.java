@@ -24,7 +24,7 @@ public class BookDto {
     private float difficultyScore;
     private String difficultyState;
     private int countOfBookMark;
-    private String isbn;
+    private String googleBookId;
 
 
     public static BookDto from(Book book) {
@@ -48,7 +48,7 @@ public class BookDto {
                 .difficultyScore(averageScoreForDifficulty)
                 .difficultyState(stateForDifficulty)
                 .countOfBookMark(book.getCountOfBookMark())
-                .isbn(book.getIsbn())
+                .googleBookId(book.getGoogleBookId())
                 .build();
     }
 
@@ -61,7 +61,7 @@ public class BookDto {
                 .publisher(bookMark.getBook().getPublisher())
                 .thumbnail(bookMark.getBook().getThumbnail())
                 .countOfBookMark(bookMark.getBook().getCountOfBookMark())
-                .isbn(bookMark.getBook().getIsbn())
+                .googleBookId(bookMark.getBook().getGoogleBookId())
                 .build();
     }
 
