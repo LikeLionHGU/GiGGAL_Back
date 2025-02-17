@@ -22,13 +22,13 @@ public class MemoService {
     private final BookRepository bookRepository;
     private final MemoRepository memoRepository;
 
-    public Long addMemo(MemoRequest memoRequest, Long bookId) {
+    public Long addMemo(MemoRequest memoRequest, String isbn) {
         String userEmail = memoRequest.getUserEmail();
         User user = userRepository.findByEmail(userEmail);
         if(user == null){
             throw new RuntimeException("User not found");
         }
-        Book book = bookRepository.findById(bookId).get();
+        Book book = bookRepository.findByIsbn(isbn);
         if(book == null) {
             throw new RuntimeException("Book not found");
         }
@@ -37,8 +37,8 @@ public class MemoService {
         return memo.getId();
     }
 
-    public List<MemoDto> findMemosOfTheUser(Long bookId, String userEmail) {
-        Book book = bookRepository.findById(bookId).get();
+    public List<MemoDto> findMemosOfTheUser(String isbn, String userEmail) {
+        Book book = bookRepository.findByIsbn(isbn);
         User user = userRepository.findByEmail(userEmail);
 
         List<MemoDto> memoDtos = memoRepository.findByBookAndUser(book, user).stream().map(MemoDto::from).collect(Collectors.toList());

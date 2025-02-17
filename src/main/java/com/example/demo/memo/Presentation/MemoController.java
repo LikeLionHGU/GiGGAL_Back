@@ -18,16 +18,16 @@ public class MemoController {
 
     private final MemoService memoService;
 
-    @PostMapping("/add/{bookId}")
-    public ResponseEntity<MemoResponseAboutMemoId> addMemo(@RequestBody MemoRequest memoRequest, @PathVariable Long bookId) {
-        Long memoId = memoService.addMemo(memoRequest, bookId);
+    @PostMapping("/add/{isbn}")
+    public ResponseEntity<MemoResponseAboutMemoId> addMemo(@RequestBody MemoRequest memoRequest, @PathVariable String isbn) {
+        Long memoId = memoService.addMemo(memoRequest, isbn);
         String message = "메모 저장 성공!";
         return ResponseEntity.ok(MemoResponseAboutMemoId.from(memoId, message));
     }
 
-    @GetMapping("/list/{bookId}")
-    public ResponseEntity<List<MemoResponse>> findMemosOfTheUser(@PathVariable Long bookId, @RequestParam String userEmail) {
-        List<MemoDto> memoDtos = memoService.findMemosOfTheUser(bookId, userEmail);
+    @GetMapping("/list/{isbn}")
+    public ResponseEntity<List<MemoResponse>> findMemosOfTheUser(@PathVariable String isbn, @RequestParam String userEmail) {
+        List<MemoDto> memoDtos = memoService.findMemosOfTheUser(isbn, userEmail);
         return ResponseEntity.ok(memoDtos.stream().map(MemoResponse::from).toList());
     }
 
