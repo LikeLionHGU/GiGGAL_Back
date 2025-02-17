@@ -1,5 +1,6 @@
 package com.example.demo.BookMark.Application;
 
+import com.example.demo.Book.Domain.Book;
 import com.example.demo.BookMark.Domain.BookMark;
 import lombok.*;
 
@@ -15,6 +16,7 @@ public class BookMarkDto {
 
     private Long id;
     private Long bookId;
+    private Book book;
     private String userEmail;
     private String bookTitle;
     private String status;
@@ -25,6 +27,7 @@ public class BookMarkDto {
 
         return BookMarkDto.builder()
                 .id(bookMark.getId())
+                .book(bookMark.getBook())
                 .bookId(bookMark.getBook().getId())
                 .bookTitle(bookMark.getBook().getTitle())
                 .status(bookMark.getStatus())
@@ -36,9 +39,21 @@ public class BookMarkDto {
         String readingTimeByString = null;
 
         if(bookMark.getTime() < 60) {
-            readingTimeByString = "" + bookMark.getTime();
+            if(bookMark.getTime() < 10) {
+                readingTimeByString = "00시간 " + "0" + bookMark.getTime() + "분";
+            }else{
+                readingTimeByString = "00시간 " + bookMark.getTime() + "분";
+            }
         }else{
-            readingTimeByString = bookMark.getTime() / 60 + "시간 " + bookMark.getTime() % 60 + "분";
+            if(bookMark.getTime()/60 < 10 && bookMark.getTime()%60 < 10) {
+                readingTimeByString = "0" + bookMark.getTime() / 60 + "시간 " + "0" + bookMark.getTime() % 60 + "분";
+            }else if(bookMark.getTime()/60 < 10 && bookMark.getTime()%60 > 10) {
+                readingTimeByString = "0" + bookMark.getTime() / 60 + "시간 " + bookMark.getTime() % 60 + "분";
+            }else if(bookMark.getTime()/60 > 10 && bookMark.getTime()%60 < 10) {
+                readingTimeByString = bookMark.getTime() / 60 + "시간 " + "0" + bookMark.getTime() % 60 + "분";
+            }else{
+                readingTimeByString = bookMark.getTime() / 60 + "시간 " + bookMark.getTime() % 60 + "분";
+            }
         }
         return readingTimeByString;
     }

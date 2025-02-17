@@ -66,21 +66,21 @@ public class BookMarkService {
         return targetBookMark.getStatus();
     }
 
-    public List<BookDto> makeBookListOfBeforeReading(String userEmail) {
+    public List<BookMarkDto> makeBookListOfBeforeReading(String userEmail) {
         String email = userEmail;
-        List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽기 전").stream().map(BookDto::from).collect(Collectors.toList());
-        return bookDtoList;
+        List<BookMarkDto> bookMarkDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽기 전").stream().map(BookMarkDto::from).collect(Collectors.toList());
+        return bookMarkDtoList;
     }
 
-    public List<BookDto> makeBookListOfNowReading(String userEmail) {
+    public List<BookMarkDto> makeBookListOfNowReading(String userEmail) {
         String email = userEmail;
-        List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽는 중").stream().map(BookDto::from).collect(Collectors.toList());
-        return bookDtoList;
+        List<BookMarkDto> bookMarkDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "읽는 중").stream().map(BookMarkDto::from).collect(Collectors.toList());
+        return bookMarkDtoList;
     }
 
-    public List<BookDto> makeBookListOfAfterReading(String userEmail) {
+    public List<BookMarkDto> makeBookListOfAfterReading(String userEmail) {
         String email = userEmail;
-        List<BookDto> bookDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "완독").stream().map(BookDto::from).collect(Collectors.toList());
-        return bookDtoList;
+        List<BookMarkDto> bookMarkDtoList = bookMarkRepository.findByUserEmailAndStatus(email, "완독").stream().map(BookMarkDto::from).collect(Collectors.toList());
+        return bookMarkDtoList;
     }
 }
