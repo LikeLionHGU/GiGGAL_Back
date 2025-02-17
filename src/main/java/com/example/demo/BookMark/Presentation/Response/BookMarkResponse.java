@@ -21,6 +21,7 @@ public class BookMarkResponse {
     private String thumbnail;
     private int countOfBookMark;
     private String time;
+    private String isbn;
 
     public static BookMarkResponse from(BookMarkDto bookMarkDto) {
         return BookMarkResponse.builder()
@@ -32,6 +33,7 @@ public class BookMarkResponse {
                 .thumbnail(bookMarkDto.getBook().getThumbnail())
                 .countOfBookMark(bookMarkDto.getBook().getCountOfBookMark())
                 .time(bookMarkDto.getTime())
+                .isbn(bookMarkDto.getBook().getIsbn())
                 .build();
     }
 }
