@@ -44,13 +44,13 @@ public class BookController {
     }
 
     @GetMapping("/ranking/difficulty")
-    public ResponseEntity<List<BookResponseWithDifficulty>> getListOfBookWithDifficulty(@RequestBody BookRequestForListUp bookRequestForListUp) {
+    public ResponseEntity<List<BookResponseWithDifficulty>> getListOfBookWithDifficulty(@RequestParam BookRequestForListUp bookRequestForListUp) {
         List<BookResponseWithDifficulty> bookResponseWithDifficulties = bookService.getBooksWithDifficulty(bookRequestForListUp).stream().map(BookResponseWithDifficulty::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithDifficulties);
     }
 
     @GetMapping("/ranking/bookmark")
-    public ResponseEntity<List<BookResponseWithBookMarkCount>> getListOfBookWithBookMark(@RequestBody BookRequestForListUp bookRequestForListUp) {
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> getListOfBookWithBookMark(@RequestParam BookRequestForListUp bookRequestForListUp) {
         List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookService.getBooksWithBookMarkCount(bookRequestForListUp).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }

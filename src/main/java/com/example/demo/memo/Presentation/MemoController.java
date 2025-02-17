@@ -26,7 +26,7 @@ public class MemoController {
     }
 
     @GetMapping("/list/{bookId}")
-    public ResponseEntity<List<MemoResponse>> findMemosOfTheUser(@PathVariable Long bookId, @RequestBody String userEmail) {
+    public ResponseEntity<List<MemoResponse>> findMemosOfTheUser(@PathVariable Long bookId, @RequestParam String userEmail) {
         List<MemoDto> memoDtos = memoService.findMemosOfTheUser(bookId, userEmail);
         return ResponseEntity.ok(memoDtos.stream().map(MemoResponse::from).toList());
     }

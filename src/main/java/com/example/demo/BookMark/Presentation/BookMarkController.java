@@ -25,7 +25,7 @@ public class BookMarkController {
     }
 
     @GetMapping("/reading/time/{bookId}")
-    public ResponseEntity<String> getReadingTime(@PathVariable Long bookId, @RequestBody String userEmail) {
+    public ResponseEntity<String> getReadingTime(@PathVariable Long bookId, @RequestParam String userEmail) {
         BookMarkDto bookMarkDto = bookMarkService.getReadingTime(bookId, userEmail);
         return ResponseEntity.ok().body(bookMarkDto.getTime());
     }
@@ -43,19 +43,19 @@ public class BookMarkController {
     }
 
     @GetMapping("/list/before/reading")
-    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfBeforeReading(@RequestBody String userEmail){
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfBeforeReading(@RequestParam String userEmail){
         List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfBeforeReading(userEmail).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
 
     @GetMapping("/list/now/reading")
-    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfNowReading(@RequestBody String userEmail){
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfNowReading(@RequestParam String userEmail){
         List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfNowReading(userEmail).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
 
     @GetMapping("/list/after/reading")
-    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfAfterReading(@RequestBody String userEmail){
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> makeListOfAfterReading(@RequestParam String userEmail){
         List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookMarkService.makeBookListOfAfterReading(userEmail).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
