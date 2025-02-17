@@ -53,6 +53,7 @@ public class Book {
                 .pageCount(request.getPageCount())
                 .thumbnail(request.getThumbnail())
                 .countOfBookMark(1)
+                .isbn(request.getIsbn())
                 .build();
     }
 }
