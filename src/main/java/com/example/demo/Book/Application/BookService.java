@@ -64,8 +64,8 @@ public class BookService {
         return bookDtoList;
     }
 
-    public BookDto getBookMarkCountAndDifficulty(Long bookId) {
-        Book book = bookRepository.findById(bookId).get();
+    public BookDto getBookMarkCountAndDifficulty(String isbn) {
+        Book book = bookRepository.findByIsbn(isbn);
         BookDto bookDto = BookDto.from(book);
         return bookDto;
     }
