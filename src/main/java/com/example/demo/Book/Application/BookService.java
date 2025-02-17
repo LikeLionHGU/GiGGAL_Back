@@ -4,7 +4,6 @@ import com.example.demo.Book.Domain.BookRepository;
 import com.example.demo.Book.Domain.Book;
 import com.example.demo.Book.Presentation.Request.BookRequest;
 import com.example.demo.Book.Presentation.Request.BookRequestForDifficulty;
-import com.example.demo.Book.Presentation.Request.BookRequestForListUp;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,8 @@ public class BookService {
         book.setCountOfBookMark(newCountOfBookMark);
     }
 
-    public List<BookDto> getBooksWithBookMarkCount(BookRequestForListUp bookRequestForListUp) {
-        List<BookDto> bookDtoList = bookRepository.findAll().stream().map(BookDto::from).collect(Collectors.toList());
+    public List<BookDto> getBooksWithBookMarkCount(String keyword) {
+        List<BookDto> bookDtoList = bookRepository.findByTitleContains(keyword).stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
 
@@ -60,8 +59,8 @@ public class BookService {
         book.setCountForDifficulty(totalDifficultyCount);
     }
 
-    public List<BookDto> getBooksWithDifficulty(BookRequestForListUp bookRequestForListUp) {
-        List<BookDto> bookDtoList = bookRepository.findByTitleContains(bookRequestForListUp.getKeyword()).stream().map(BookDto::from).collect(Collectors.toList());
+    public List<BookDto> getBooksWithDifficulty(String keyword) {
+        List<BookDto> bookDtoList = bookRepository.findByTitleContains(keyword).stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
 }

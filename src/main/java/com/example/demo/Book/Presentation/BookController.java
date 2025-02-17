@@ -5,11 +5,9 @@ import com.example.demo.Book.Domain.Book;
 import com.example.demo.Book.Domain.BookRepository;
 import com.example.demo.Book.Presentation.Request.BookRequest;
 import com.example.demo.Book.Presentation.Request.BookRequestForDifficulty;
-import com.example.demo.Book.Presentation.Request.BookRequestForListUp;
 import com.example.demo.Book.Presentation.Response.BookResponseWithBookMarkCount;
 import com.example.demo.Book.Presentation.Response.BookResponseWithDifficulty;
 import com.example.demo.BookMark.Application.BookMarkService;
-import com.example.demo.User.Application.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,14 +41,14 @@ public class BookController {
     }
 
     @GetMapping("/ranking/difficulty")
-    public ResponseEntity<List<BookResponseWithDifficulty>> getListOfBookWithDifficulty(@RequestParam BookRequestForListUp bookRequestForListUp) {
-        List<BookResponseWithDifficulty> bookResponseWithDifficulties = bookService.getBooksWithDifficulty(bookRequestForListUp).stream().map(BookResponseWithDifficulty::from).collect(Collectors.toList());
+    public ResponseEntity<List<BookResponseWithDifficulty>> getListOfBookWithDifficulty(@RequestParam String keyword) {
+        List<BookResponseWithDifficulty> bookResponseWithDifficulties = bookService.getBooksWithDifficulty(keyword).stream().map(BookResponseWithDifficulty::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithDifficulties);
     }
 
     @GetMapping("/ranking/bookmark")
-    public ResponseEntity<List<BookResponseWithBookMarkCount>> getListOfBookWithBookMark(@RequestParam BookRequestForListUp bookRequestForListUp) {
-        List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookService.getBooksWithBookMarkCount(bookRequestForListUp).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> getListOfBookWithBookMark(@RequestParam String keyword) {
+        List<BookResponseWithBookMarkCount> bookResponseWithBookMarkCounts = bookService.getBooksWithBookMarkCount(keyword).stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
 }
