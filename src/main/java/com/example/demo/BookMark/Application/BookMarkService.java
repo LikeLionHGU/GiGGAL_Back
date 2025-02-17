@@ -46,9 +46,9 @@ public class BookMarkService {
         return "시간 저장 성공!";
     }
 
-    public BookMarkDto getReadingTime(String isbn, String userEmail) {
+    public BookMarkDto getReadingTime(String googleBookId, String userEmail) {
         String email = userEmail;
-        BookMarkDto bookMarkDto = BookMarkDto.from(bookMarkRepository.findByBookIsbnAndUserEmail(isbn, email));
+        BookMarkDto bookMarkDto = BookMarkDto.from(bookMarkRepository.findByBookGoogleBookIdAndUserEmail(googleBookId, email));
         return bookMarkDto;
     }
 
