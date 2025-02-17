@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MemoRepository extends JpaRepository<Memo, Long> {
+public interface MemoRepository extends JpaRepository<Memo, String> {
     List<Memo> findByBookAndUser(Book book, User user);
 }
