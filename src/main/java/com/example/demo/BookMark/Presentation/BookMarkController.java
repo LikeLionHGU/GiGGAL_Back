@@ -25,9 +25,9 @@ public class BookMarkController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/reading/time/{bookId}")
-    public ResponseEntity<String> getReadingTime(@PathVariable Long bookId, @RequestParam String userEmail) {
-        BookMarkDto bookMarkDto = bookMarkService.getReadingTime(bookId, userEmail);
+    @GetMapping("/reading/time/{isbn}")
+    public ResponseEntity<String> getReadingTime(@PathVariable String isbn, @RequestParam String userEmail) {
+        BookMarkDto bookMarkDto = bookMarkService.getReadingTime(isbn, userEmail);
         return ResponseEntity.ok().body(bookMarkDto.getTime());
     }
 

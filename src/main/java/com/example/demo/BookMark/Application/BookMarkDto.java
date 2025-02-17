@@ -21,6 +21,7 @@ public class BookMarkDto {
     private String bookTitle;
     private String status;
     private String time;
+    private String isbn;
 
     public static BookMarkDto from(BookMark bookMark) {
         String timeForString = timeToString(bookMark);
@@ -32,6 +33,7 @@ public class BookMarkDto {
                 .bookTitle(bookMark.getBook().getTitle())
                 .status(bookMark.getStatus())
                 .time(timeForString)
+                .isbn(bookMark.getBook().getIsbn())
                 .build();
     }
 

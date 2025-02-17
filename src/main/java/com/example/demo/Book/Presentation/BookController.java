@@ -53,9 +53,9 @@ public class BookController {
         return ResponseEntity.ok().body(bookResponseWithBookMarkCounts);
     }
 
-    @GetMapping("/bookmarkNumber/difficulty/{bookId}")
-    public ResponseEntity<BookResponseForBookMarkCountAndDifficulty> getBookCountAndDifficulty(@PathVariable Long bookId) {
-        BookResponseForBookMarkCountAndDifficulty bookResponse = BookResponseForBookMarkCountAndDifficulty.from(bookService.getBookMarkCountAndDifficulty(bookId));
+    @GetMapping("/bookmarkNumber/difficulty/{isbn}")
+    public ResponseEntity<BookResponseForBookMarkCountAndDifficulty> getBookCountAndDifficulty(@PathVariable String isbn) {
+        BookResponseForBookMarkCountAndDifficulty bookResponse = BookResponseForBookMarkCountAndDifficulty.from(bookService.getBookMarkCountAndDifficulty(isbn));
         return ResponseEntity.ok().body(bookResponse);
     }
 }
