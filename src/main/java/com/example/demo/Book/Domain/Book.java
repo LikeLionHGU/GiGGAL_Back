@@ -28,6 +28,7 @@ public class Book {
     private int countForDifficulty;
     private int difficultyScore;
     private int countOfBookMark;
+    private String isbn;
 
 
     @OneToMany(
