@@ -31,13 +31,13 @@ public class BookMarkController {
     }
 
     @PutMapping("/reading/{bookId}")
-    public ResponseEntity<String> changeStatusToReading(@PathVariable Long bookId, @RequestBody String userEmail){
+    public ResponseEntity<String> changeStatusToReading(@PathVariable Long bookId, @RequestParam String userEmail){
         String message = bookMarkService.changeStatusToReading(bookId, userEmail);
         return ResponseEntity.ok(message);
     }
 
     @PutMapping("/complete/{bookId}")
-    public ResponseEntity<String> changeStatusToComplete(@PathVariable Long bookId, @RequestBody String userEmail){
+    public ResponseEntity<String> changeStatusToComplete(@PathVariable Long bookId, @RequestParam String userEmail){
         String message = bookMarkService.changeStatusToComplete(bookId, userEmail);
         return ResponseEntity.ok(message);
     }

@@ -22,7 +22,6 @@ public class BookMarkService {
 
     private final BookMarkRepository bookMarkRepository;
     private final BookRepository bookRepository;
-    private final UserService userService;
     private final UserRepository userRepository;
 
     public String addBookMark(Book requestBook, String userEmail) {
