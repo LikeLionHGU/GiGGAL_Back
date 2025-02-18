@@ -30,7 +30,7 @@ public class BookController {
     public ResponseEntity<String> createBookAndBookMark(@RequestBody BookRequest bookRequest) {
         bookService.createBook(bookRequest);
         String email = bookRequest.getUserEmail();
-        Book requestBook = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
+        Book requestBook = bookRepository.findByGoogleBookId(bookRequest.getGoogleBookId());
         String message = bookMarkService.addBookMark(requestBook, email);
         return ResponseEntity.ok(message);
     }

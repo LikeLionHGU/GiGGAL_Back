@@ -24,13 +24,16 @@ public class BookMarkService {
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public String addBookMark(Book requestBook, String userEmail) {
         String email = userEmail;
         User requestUser = userRepository.findByEmail(email);
-        Book book = bookRepository.findByTitleAndAuthorAndPublisher(requestBook.getTitle(), requestBook.getAuthor(), requestBook.getPublisher());
+        Book book = bookRepository.findByGoogleBookId(requestBook.getGoogleBookId());
         BookMark bookMark = bookMarkRepository.findByBookIdAndUserEmail(requestBook.getId(), email);
         if(bookMark == null){
             bookMarkRepository.save(BookMark.from(requestBook, requestUser));
+            int newCountOfBookMark = book.getCountOfBookMark() + 1;
+            book.setCountOfBookMark(newCountOfBookMark);
             return "북마크에 성공하였습니다.";
         }else{
             return "이미 북마크 되어 있는 책입니다.";

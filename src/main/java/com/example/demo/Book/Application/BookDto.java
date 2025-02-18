@@ -29,13 +29,16 @@ public class BookDto {
 
     public static BookDto from(Book book) {
         float averageScoreForDifficulty = ((float) book.getDifficultyScore())/((float) book.getCountForDifficulty());
-        String stateForDifficulty  = null;
+        String stateForDifficulty = null;
         if(averageScoreForDifficulty > 3.5) {
             stateForDifficulty = "관련 지식이 필요해요.";
         }else if(averageScoreForDifficulty >= 2.5) {
             stateForDifficulty = "읽을만해요.";
-        }else{
+        }else if(averageScoreForDifficulty > 0) {
             stateForDifficulty = "술술 읽혀요.";
+        }else{
+            stateForDifficulty = "정보없음.";
+
         }
 
         return BookDto.builder()

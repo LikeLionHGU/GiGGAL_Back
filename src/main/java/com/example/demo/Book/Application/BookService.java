@@ -17,19 +17,11 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-    @Transactional
     public void createBook(BookRequest bookRequest) {
-        Book book = bookRepository.findByTitleAndAuthorAndPublisher(bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getPublisher());
+        Book book = bookRepository.findByGoogleBookId(bookRequest.getGoogleBookId());
         if(book == null) {
-           BookDto bookDto = BookDto.from(bookRepository.save(Book.from(bookRequest)));
-        }else{
-            updateBookMarkCount(book);
+           bookRepository.save(Book.from(bookRequest));
         }
-    }
-
-    public void updateBookMarkCount(Book book){
-        int newCountOfBookMark = book.getCountOfBookMark() + 1;
-        book.setCountOfBookMark(newCountOfBookMark);
     }
 
     public List<BookDto> getBooksWithBookMarkCount(String keyword) {
@@ -66,7 +58,6 @@ public class BookService {
 
     public BookDto getBookMarkCountAndDifficulty(String googleBookId) {
         Book book = bookRepository.findByGoogleBookId(googleBookId);
-        System.out.println("Book: " + book);
         BookDto bookDto = BookDto.from(book);
         return bookDto;
     }
