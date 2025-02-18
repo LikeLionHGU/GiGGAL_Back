@@ -9,12 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemoResponse {
+    private Long memoId;
     private String bookTitle;
     private String content;
     private String date;
 
     public static MemoResponse from(MemoDto memoDto) {
         return MemoResponse.builder()
+                .memoId(memoDto.getId())
                 .bookTitle(memoDto.getBookTitle())
                 .content(memoDto.getContent())
                 .date(memoDto.getDate())

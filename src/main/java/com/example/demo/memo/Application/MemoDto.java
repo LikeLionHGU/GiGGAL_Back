@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class MemoDto {
 
+    private Long id;
     private String bookTitle;
     private String content;
     private String date;
@@ -36,6 +37,7 @@ public class MemoDto {
 
     public static MemoDto from(Memo memo) {
         return MemoDto.builder()
+                .id(memo.getId())
                 .bookTitle(memo.getBook().getTitle())
                 .content(memo.getContent())
                 .date(memo.getDate())
