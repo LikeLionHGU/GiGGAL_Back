@@ -66,6 +66,7 @@ public class BookService {
 
     public BookDto getBookMarkCountAndDifficulty(String googleBookId) {
         Book book = bookRepository.findByGoogleBookId(googleBookId);
+        System.out.println("Book: " + book);
         BookDto bookDto = BookDto.from(book);
         return bookDto;
     }
