@@ -52,7 +52,7 @@ public class Book {
                 .publisher(request.getPublisher())
                 .pageCount(request.getPageCount())
                 .thumbnail(request.getThumbnail())
-                .countOfBookMark(1)
+                .countOfBookMark(0)
                 .googleBookId(request.getGoogleBookId())
                 .build();
     }
