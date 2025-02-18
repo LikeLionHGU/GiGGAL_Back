@@ -58,4 +58,10 @@ public class BookController {
         BookResponseForBookMarkCountAndDifficulty bookResponse = BookResponseForBookMarkCountAndDifficulty.from(bookService.getBookMarkCountAndDifficulty(googleBookId));
         return ResponseEntity.ok().body(bookResponse);
     }
+
+    @GetMapping("/ranking/recommendation")
+    public ResponseEntity<List<BookResponseWithBookMarkCount>> getBookRecommendation() {
+        List <BookResponseWithBookMarkCount> bookResponses = bookService.getRecommendationsOfBook().stream().map(BookResponseWithBookMarkCount::from).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookResponses);
+    }
 }

@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,5 +61,10 @@ public class BookService {
         Book book = bookRepository.findByGoogleBookId(googleBookId);
         BookDto bookDto = BookDto.from(book);
         return bookDto;
+    }
+
+    public List<BookDto> getRecommendationsOfBook() {
+        List<BookDto> bookDtoList = bookRepository.findTop4ByOrderByCountOfBookMarkDesc().stream().map(BookDto::from).collect(Collectors.toList());
+        return bookDtoList;
     }
 }
