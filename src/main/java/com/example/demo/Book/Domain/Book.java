@@ -24,6 +24,7 @@ public class Book {
     private String author;
     private String publisher;
     private int pageCount;
+    private String bookDetail;
     private String thumbnail;
     private int countForDifficulty;
     private int difficultyScore;
@@ -51,6 +52,7 @@ public class Book {
                 .author(request.getAuthor())
                 .publisher(request.getPublisher())
                 .pageCount(request.getPageCount())
+                .bookDetail(request.getBookDetail())
                 .thumbnail(request.getThumbnail())
                 .countOfBookMark(0)
                 .googleBookId(request.getGoogleBookId())

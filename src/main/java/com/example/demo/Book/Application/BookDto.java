@@ -20,6 +20,7 @@ public class BookDto {
     private String author;
     private int pageCount;
     private String publisher;
+    private String bookDetail;
     private String thumbnail;
     private float difficultyScore;
     private String difficultyState;
@@ -47,6 +48,7 @@ public class BookDto {
                 .author(book.getAuthor())
                 .pageCount(book.getPageCount())
                 .publisher(book.getPublisher())
+                .bookDetail(book.getBookDetail())
                 .thumbnail(book.getThumbnail())
                 .difficultyScore(averageScoreForDifficulty)
                 .difficultyState(stateForDifficulty)
@@ -62,6 +64,7 @@ public class BookDto {
                 .author(bookMark.getBook().getAuthor())
                 .pageCount(bookMark.getBook().getPageCount())
                 .publisher(bookMark.getBook().getPublisher())
+                .bookDetail(bookMark.getBook().getBookDetail())
                 .thumbnail(bookMark.getBook().getThumbnail())
                 .countOfBookMark(bookMark.getBook().getCountOfBookMark())
                 .googleBookId(bookMark.getBook().getGoogleBookId())
