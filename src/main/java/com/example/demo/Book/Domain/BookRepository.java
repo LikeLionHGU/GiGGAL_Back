@@ -9,6 +9,6 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     Book findByGoogleBookId(String googleBookId);
     Book findByTitleAndAuthorAndPublisher(String title, String author, String publisher);
-    List<Book> findByTitleContains(String title);
+    List<Book> findByTitleOrBookDetailContains(String title, String bookDetail);
     List<Book> findTop4ByOrderByCountOfBookMarkDesc();
 }
