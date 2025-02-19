@@ -24,7 +24,10 @@ public class Book {
     private String author;
     private String publisher;
     private int pageCount;
+
+    @Column(columnDefinition = "TEXT")
     private String bookDetail;
+
     private String thumbnail;
     private int countForDifficulty;
     private int difficultyScore;
