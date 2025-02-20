@@ -32,7 +32,6 @@ public class BookMarkService {
         BookMark bookMark = bookMarkRepository.findByBookIdAndUserEmail(requestBook.getId(), email);
         if(bookMark == null){
             bookMarkRepository.save(BookMark.from(requestBook, requestUser));
-            System.out.println("bookMarkCount: " + book.getCountOfBookMark());
             int newCountOfBookMark = book.getCountOfBookMark() + 1;
             book.setCountOfBookMark(newCountOfBookMark);
             return "북마크에 성공하였습니다.";
