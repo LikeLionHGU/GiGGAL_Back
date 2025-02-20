@@ -26,7 +26,7 @@ public class BookService {
     }
 
     public List<BookDto> getBooksWithBookMarkCount(String keyword) {
-        List<BookDto> bookDtoList = bookRepository.findByTitleOrBookDetailContains(keyword, keyword).stream().map(BookDto::from).collect(Collectors.toList());
+        List<BookDto> bookDtoList = bookRepository.findByTitleContainsOrBookDetailContains(keyword, keyword).stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
 
@@ -53,7 +53,7 @@ public class BookService {
     }
 
     public List<BookDto> getBooksWithDifficulty(String keyword) {
-        List<BookDto> bookDtoList = bookRepository.findByTitleOrBookDetailContains(keyword, keyword).stream().map(BookDto::from).collect(Collectors.toList());
+        List<BookDto> bookDtoList = bookRepository.findByTitleContainsOrBookDetailContains(keyword, keyword).stream().map(BookDto::from).collect(Collectors.toList());
         return bookDtoList;
     }
 
