@@ -4,4 +4,4 @@ Bookgie는 더 나은 독서 경험을 위한 혁신적인 플랫폼입니다.
 
 📌 깃허브 리포지토리에서 자세한 내용을 확인해 보세요!
 Bookgie 리포지토리 바로가기 
-👉 https://github.com/LikeLionHGU/GIGGAL_Front.git
+👉https://github.com/LikeLionHGU/GIGGAL_Front.git
